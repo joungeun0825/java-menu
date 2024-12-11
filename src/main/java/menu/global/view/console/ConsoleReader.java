@@ -6,7 +6,7 @@ import menu.global.exception.ErrorMessage;
 
 public final class ConsoleReader {
     public static String enterMessage() {
-        return Validator.validate(Console.readLine().trim().replace("//s",""));
+        return Validator.validate(Console.readLine().trim().replaceAll("\\s",""));
     }
 
     private static class Validator {

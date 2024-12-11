@@ -1,17 +1,21 @@
 package menu.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Coaches {
-    private Map<Coach, Menu> recommends;
+    private List<Coach> coaches;
 
     public Coaches() {
-        recommends = new HashMap<>();
+        coaches = new ArrayList<>();
     }
 
     public void add(String name) {
         Coach coach = new Coach(name);
-        recommends.put(coach, new Menu());
+        coaches.add(coach);
+    }
+
+    public List<Coach> getCoaches(){
+        return this.coaches;
     }
 }

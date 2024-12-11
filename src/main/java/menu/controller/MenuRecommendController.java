@@ -2,6 +2,7 @@ package menu.controller;
 
 import menu.domain.Coach;
 import menu.domain.Coaches;
+import menu.domain.constant.Menu;
 import menu.global.view.InputView;
 import menu.global.view.OutputView;
 import menu.global.view.console.ConsoleWriter;
@@ -20,6 +21,7 @@ public class MenuRecommendController {
 
     public void run() {
         Coaches coaches = readNames();
+        readExceptMenu(coaches);
     }
 
     private Coaches readNames() {
@@ -28,6 +30,16 @@ public class MenuRecommendController {
             return inputView.readNames();
         });
         names.forEach(coaches::add);
+        return coaches;
+    }
+
+    private Coaches readExceptMenu(Coaches coaches) {
+        for (Coach coach : coaches.getCoaches()) {
+            List<Menu> exceptMenus = retry(() -> {
+                return inputView.readExceptMenu(coach);
+            });
+            coach.updateExceptMenus(exceptMenus);
+        }
         return coaches;
     }
 
