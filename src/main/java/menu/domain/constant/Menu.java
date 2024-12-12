@@ -3,7 +3,10 @@ package menu.domain.constant;
 import menu.global.exception.CustomException;
 import menu.global.exception.ErrorMessage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Menu {
     규동("규동", Category.일식), 우동("우동",Category.일식), 미소시루("미소시루", Category.일식), 스시("스시",Category.일식), 가츠동("가츠동",Category.일식), 오니기리("오니기리",Category.일식), 하이라이스("하이라이스",Category.일식), 라멘("라멘",Category.일식), 오코노미야끼("오코노미야끼",Category.일식),
@@ -24,8 +27,23 @@ public enum Menu {
         return name;
     }
 
+    public static List<String> getNames(){
+        List<String> names = new ArrayList<>();
+        for (Menu menu : values()) {
+            names.add(menu.name());
+        }
+        return names;
+    }
+
     public Category getCategory() {
         return category;
+    }
+
+    public static List<String> getMenusFromCategory(String category){
+        return Arrays.stream(Menu.values())
+                .filter(element -> element.category.name().equals(category))
+                .map(Menu::getName)
+                .collect(Collectors.toList());
     }
 
     public static Menu from(String menu) {
